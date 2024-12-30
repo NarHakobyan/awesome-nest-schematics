@@ -18,10 +18,6 @@
       "format": "path",
       "description": "The path to create the filter."
     },
-    "language": {
-      "type": "string",
-      "description": "Nest filter language (ts/js)."
-    },
     "sourceRoot": {
       "type": "string",
       "description": "Nest filter source root directory."

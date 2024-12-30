@@ -1,4 +1,5 @@
 import { join, Path, strings } from '@angular-devkit/core';
+import * as inflection from 'inflection';
 import { classify } from '@angular-devkit/core/src/utils/strings';
 import {
   apply,
@@ -17,7 +18,6 @@ import {
   url,
 } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import * as pluralize from 'pluralize';
 import { DeclarationOptions, ModuleDeclarator, ModuleFinder } from '../..';
 import {
   addPackageJsonDependency,
@@ -119,8 +119,8 @@ function generate(options: ResourceOptions): Source {
         }
         return true;
       }),
-      options.spec 
-        ? noop() 
+      options.spec
+        ? noop()
         : filter((path) => {
             const suffix = `.__specFileSuffix__.ts`;
             return !path.endsWith(suffix)
@@ -134,7 +134,7 @@ function generate(options: ResourceOptions): Source {
             classifiedName.charAt(0).toLowerCase() + classifiedName.slice(1)
           );
         },
-        singular: (name: string) => pluralize.singular(name),
+        singular: (name: string) => inflection.singularize(name),
         ent: (name: string) => name + '.entity',
       }),
       move(options.path),

@@ -1,5 +1,5 @@
 {
-  "name": "@nestjs/schematics",
+  "name": "awesome-nestjs-schematics",
   "version": "10.2.3",
   "description": "Nest - modern, fast, powerful node.js web framework (@schematics)",
   "main": "dist/index.js",
@@ -43,9 +43,10 @@
   "dependencies": {
     "@angular-devkit/core": "17.3.11",
     "@angular-devkit/schematics": "17.3.11",
+    "change-case-commonjs": "^5.4.4",
     "comment-json": "4.2.5",
-    "jsonc-parser": "3.3.1",
-    "pluralize": "8.0.0"
+    "inflection": "^3.0.0",
+    "jsonc-parser": "3.3.1"
   },
   "devDependencies": {
     "@commitlint/cli": "19.6.1",
@@ -95,5 +96,6 @@
   },
   "lint-staged": {
     "**/*.{ts,json}": []
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

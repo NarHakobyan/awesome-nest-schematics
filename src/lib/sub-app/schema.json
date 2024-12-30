@@ -13,10 +13,6 @@
       },
       "x-prompt": "What name would you like to use for the app?"
     },
-    "language": {
-      "type": "string",
-      "description": "Nest application language."
-    },
     "path": {
       "type": "string",
       "format": "path",

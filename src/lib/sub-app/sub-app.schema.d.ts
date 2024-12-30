@@ -6,10 +6,6 @@ export interface SubAppOptions {
    */
   name: string;
   /**
-   * Application language.
-   */
-  language?: string;
-  /**
    * The path to create the application.
    */
   path?: string | Path;

@@ -23,10 +23,6 @@
       "format": "path",
       "description": "The path to import the module."
     },
-    "language": {
-      "type": "string",
-      "description": "Nest module language (ts/js)."
-    },
     "sourceRoot": {
       "type": "string",
       "description": "Nest module source root directory."

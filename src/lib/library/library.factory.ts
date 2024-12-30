@@ -15,7 +15,6 @@ import {
 import { parse } from 'jsonc-parser';
 import { normalizeToKebabOrSnakeCase } from '../../utils/formatting';
 import {
-  DEFAULT_LANGUAGE,
   DEFAULT_LIB_PATH,
   DEFAULT_PATH_NAME,
   PROJECT_TYPE,
@@ -52,7 +51,7 @@ function getDefaultLibraryPrefix(defaultLibraryPrefix = '@app') {
     '.nest-cli.json',
     'nest.json',
   ]);
-  
+
   try {
     const nestJson = JSON.parse(content || '{}');
     if (nestJson.hasOwnProperty('defaultLibraryPrefix')) {
@@ -60,7 +59,7 @@ function getDefaultLibraryPrefix(defaultLibraryPrefix = '@app') {
     }
   } catch (e) {
   }
-  
+
   return defaultLibraryPrefix;
 }
 
@@ -72,7 +71,6 @@ function transform(options: LibraryOptions): LibraryOptions {
   if (!target.name) {
     throw new SchematicsException('Option (name) is required.');
   }
-  target.language = !!target.language ? target.language : DEFAULT_LANGUAGE;
   target.name = normalizeToKebabOrSnakeCase(target.name);
   target.path =
     target.path !== undefined
@@ -292,7 +290,7 @@ function addLibraryToCliOptions(
 function generate(options: LibraryOptions): Source {
   const path = join(options.path as Path, options.name);
 
-  return apply(url(join('./files' as Path, options.language)), [
+  return apply(url('./files'), [
     template({
       ...strings,
       ...options,

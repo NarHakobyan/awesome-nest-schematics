@@ -18,10 +18,6 @@
       "description": "The prefix of the library.",
       "x-prompt": "What prefix would you like to use for the library (default: @app or 'defaultLibraryPrefix' setting value)?"
     },
-    "language": {
-      "type": "string",
-      "description": "Nest library language."
-    },
     "path": {
       "type": "string",
       "format": "path",

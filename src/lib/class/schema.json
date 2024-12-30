@@ -33,10 +33,6 @@
       "format": "path",
       "description": "The path to create the class."
     },
-    "language": {
-      "type": "string",
-      "description": "Nest class language (ts/js)."
-    },
     "sourceRoot": {
       "type": "string",
       "description": "Nest controller source root directory."

@@ -13,6 +13,8 @@ import {
   Tree,
   url,
 } from '@angular-devkit/schematics';
+import * as inflection from 'inflection';
+import * as customStrings from '../../utils/custom-strings';
 import { normalizeToKebabOrSnakeCase } from '../../utils/formatting';
 import {
   DeclarationOptions,
@@ -21,7 +23,6 @@ import {
 import { ModuleFinder } from '../../utils/module.finder';
 import { Location, NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
-import { DEFAULT_LANGUAGE } from '../defaults';
 import { ControllerOptions } from './controller.schema';
 
 const ELEMENT_METADATA = 'controllers';
@@ -48,8 +49,6 @@ function transform(source: ControllerOptions): ControllerOptions {
   const location: Location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
   target.path = normalizeToKebabOrSnakeCase(location.path);
-  target.language =
-    target.language !== undefined ? target.language : DEFAULT_LANGUAGE;
 
   target.specFileSuffix = normalizeToKebabOrSnakeCase(
     source.specFileSuffix || 'spec',
@@ -63,16 +62,14 @@ function transform(source: ControllerOptions): ControllerOptions {
 
 function generate(options: ControllerOptions) {
   return (context: SchematicContext) =>
-    apply(url(join('./files' as Path, options.language)), [
-      options.spec 
-        ? noop() 
-        : filter((path) => {
-            const languageExtension = options.language || 'ts';
-            const suffix = `.__specFileSuffix__.${languageExtension}`;
-            return !path.endsWith(suffix)
-        }),
+    apply(url('./files'), [
+      options.spec
+        ? noop()
+        : filter((path) => !path.endsWith(`.__specFileSuffix__.ts`)),
       template({
         ...strings,
+        ...inflection,
+        ...customStrings.generate(options.name),
         ...options,
       }),
       move(options.path),

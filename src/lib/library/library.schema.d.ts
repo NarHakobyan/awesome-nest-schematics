@@ -10,10 +10,6 @@ export interface LibraryOptions {
    */
   prefix?: string;
   /**
-   * Application language.
-   */
-  language?: string;
-  /**
    * The path to create the library.
    */
   path?: string | Path;

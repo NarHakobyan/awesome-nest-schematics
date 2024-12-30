@@ -18,10 +18,6 @@
       "format": "path",
       "description": "The path to create the provider."
     },
-    "language": {
-      "type": "string",
-      "description": "Nest provider language (ts/js)."
-    },
     "sourceRoot": {
       "type": "string",
       "description": "Nest provider source root directory."

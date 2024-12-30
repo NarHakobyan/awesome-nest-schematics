@@ -1,16 +1,6 @@
 {
-  "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
-    "application": {
-      "factory": "./lib/application/application.factory#main",
-      "description": "Create a Nest application.",
-      "schema": "./lib/application/schema.json"
-    },
-    "angular-app": {
-      "factory": "./lib/client-app/angular/angular.factory#main",
-      "description": "Create a new Angular application.",
-      "schema": "./lib/client-app/angular/schema.json"
-    },
     "class": {
       "factory": "./lib/class/class.factory#main",
       "description": "Create a new class.",

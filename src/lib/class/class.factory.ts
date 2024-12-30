@@ -16,7 +16,6 @@ import {
 import { normalizeToKebabOrSnakeCase } from '../../utils/formatting';
 import { Location, NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
-import { DEFAULT_LANGUAGE } from '../defaults';
 import { ClassOptions } from './class.schema';
 
 export function main(options: ClassOptions): Rule {
@@ -41,9 +40,6 @@ function transform(options: ClassOptions): ClassOptions {
     target.className = target.name;
   }
 
-  target.language =
-    target.language !== undefined ? target.language : DEFAULT_LANGUAGE;
-
   target.path = normalizeToKebabOrSnakeCase(location.path);
   target.path = target.flat
     ? target.path
@@ -54,11 +50,11 @@ function transform(options: ClassOptions): ClassOptions {
 
 function generate(options: ClassOptions): Source {
   return (context: SchematicContext) =>
-    apply(url(join('./files' as Path, options.language)), [
+    apply(url('./files'), [
       options.spec
         ? noop()
         : filter((path) => {
-            const languageExtension = options.language || 'ts';
+            const languageExtension = 'ts';
             const suffix = `.__specFileSuffix__.${languageExtension}`;
             return !path.endsWith(suffix);
           }),
