@@ -20,8 +20,6 @@ import { DtoOptions } from './dto.schema';
 import { toDtoClassName } from '../../utils/custom-strings';
 
 export function main(options: DtoOptions): Rule {
-
-  console.log(options);
   options = transform(options);
   return chain([mergeSourceRoot(options), mergeWith(generate(options))]);
 }

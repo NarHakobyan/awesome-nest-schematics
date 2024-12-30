@@ -59,7 +59,7 @@ function transform(options: ResourceOptions): ResourceOptions {
   target.path = target.flat
     ? target.path
     : join(target.path as Path, target.name);
-  target.isSwaggerInstalled = options.isSwaggerInstalled ?? false;
+  target.isSwaggerInstalled = !!options.isSwaggerInstalled;
 
   return target;
 }
