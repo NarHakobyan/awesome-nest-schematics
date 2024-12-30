@@ -1,17 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { <%= classify(name) %>Controller } from './<%= name %>.controller';
-import { <%= classify(name) %>Service } from './<%= name %>.service';
+import { <%= controllerClassName %> } from './<%= controllerFileName %>';
+import { <%= serviceClassName %> } from './<%= serviceFileName %>';
 
-describe('<%= classify(name) %>Controller', () => {
-  let controller: <%= classify(name) %>Controller;
+describe('<%= controllerClassName %>', () => {
+  let controller: <%= controllerClassName %>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [<%= classify(name) %>Controller],
-      providers: [<%= classify(name) %>Service],
+      controllers: [<%= controllerClassName %>],
+      providers: [<%= serviceClassName %>],
     }).compile();
 
-    controller = module.get<<%= classify(name) %>Controller>(<%= classify(name) %>Controller);
+    controller = module.get<<%= controllerClassName %>>(<%= controllerClassName %>);
   });
 
   it('should be defined', () => {

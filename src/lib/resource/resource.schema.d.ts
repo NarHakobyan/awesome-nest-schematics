@@ -35,19 +35,6 @@ export interface ResourceOptions {
    */
   skipImport?: boolean;
   /**
-   * The transport layer.
-   */
-  type?:
-    | 'rest'
-    | 'graphql-code-first'
-    | 'graphql-schema-first'
-    | 'microservice'
-    | 'ws';
-  /**
-   * When true, CRUD entry points are generated.
-   */
-  crud?: boolean;
-  /**
    * Flag to indicate if a directory is created.
    */
   flat?: boolean;

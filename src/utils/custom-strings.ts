@@ -26,6 +26,7 @@ export function generate(name: string) {
     translationRepositoryFileName: toTranslationRepositoryFileName(name),
     createCommandFileName: toCreateCommandFileName(name),
     getQueryFileName: toGetQueryFileName(name),
+    getHandlerFileName: toGetHandlerFileName(name),
     controllerFileName: toControllerFileName(name),
     dtoFileName: toDtoFileName(name),
     notFoundExceptionFileName: toNotFoundExceptionFileName(name),
@@ -36,6 +37,7 @@ export function generate(name: string) {
     moduleFileName: toModuleFileName(name),
     className: toClassName(name),
     tableName: toTableName(name),
+    translationsTableName: toTableName(name) + '_translations',
     repositoryClassName: toRepositoryClassName(name),
     translationRepositoryClassName: toTranslationRepositoryClassName(name),
     fileName: toFileName(name),
@@ -44,6 +46,12 @@ export function generate(name: string) {
     createDtoVarName: inflection.camelize(toCreateDtoClassName(name), true),
     pageOptionsDtoVarName: inflection.camelize(toPageOptionsDtoClassName(name), true),
     updateDtoVarName: inflection.camelize(toUpdateDtoClassName(name), true),
+    repositoryVarName: inflection.camelize(toRepositoryClassName(name), true),
+    tableAliasName: toTableName(inflection.singularize(name)),
+    foreignKeyFieldName: inflection.titleize(inflection.singularize(name)) + 'Id',
+    foreignKeyColumnName: inflection.underscore(inflection.singularize(name)) + '_id',
+    translationEntityVarName: inflection.camelize(toTranslationEntityClassName(name), true),
+    translationRepositoryVarName: inflection.camelize(toTranslationRepositoryClassName(name), true),
     createFunctionName: 'create' + toClassName(name),
     updateFunctionName: 'update' + toClassName(name),
     deleteFunctionName: 'delete' + toClassName(name),
@@ -119,8 +127,14 @@ export function toTranslationRepositoryFileName(name): string {
 export function toCreateCommandFileName(name: string) {
   return `create-${toFileName(name)}.command.ts`;
 }
+export function toCreateHandlerFileName(name: string) {
+  return `create-${toFileName(name)}.handler.ts`;
+}
 export function toGetQueryFileName(name: string) {
   return `get-${toFileName(name)}.query.ts`;
+}
+export function toGetHandlerFileName(name: string) {
+  return `get-${toFileName(name)}.handler.ts`;
 }
 export function toControllerFileName(name: string) {
   return `${toFileName(name)}.controller.ts`;
@@ -150,7 +164,7 @@ export function toClassName(name: string) {
   return changeCase.pascalCase(name);
 }
 export function toTableName(name: string) {
-  return inflection.dasherize(inflection.pluralize(name));
+  return inflection.underscore(inflection.pluralize(name));
 }
 export function toControllerName(name: string) {
   return inflection.dasherize(inflection.pluralize(name));

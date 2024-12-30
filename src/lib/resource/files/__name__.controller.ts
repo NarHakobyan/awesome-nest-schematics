@@ -1,63 +1,64 @@
-<% if (crud && type === 'rest') { %>import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';<%
-} else if (crud && type === 'microservice') { %>import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';<%
-} else { %>import { Controller } from '@nestjs/common';<%
-} %>
-import { <%= classify(name) %>Service } from './<%= name %>.service';<% if (crud) { %>
-import { Create<%= singular(classify(name)) %>Dto } from './dto/create-<%= singular(name) %>.dto';
-import { Update<%= singular(classify(name)) %>Dto } from './dto/update-<%= singular(name) %>.dto';<% } %>
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 
-<% if (type === 'rest') { %>@Controller('<%= dasherize(name) %>')<% } else { %>@Controller()<% } %>
-export class <%= classify(name) %>Controller {
-  constructor(private readonly <%= lowercased(name) %>Service: <%= classify(name) %>Service) {}<% if (type === 'rest' && crud) { %>
+import type { PageDto } from '../../common/dto/page.dto';
+import { Auth, UUIDParam } from '../../decorators';
+import { <%= createDtoClassName %> } from './dtos/<%= createDtoFileName %>';
+import type { <%= dtoClassName %> } from './dtos/<%= dtoFileName %>';
+import { <%= pageOptionsDtoClassName %> } from './dtos/<%= pageOptionsDtoFileName %>';
+import { <%= updateDtoClassName %> } from './dtos/<%= updateDtoFileName %>';
+import { <%= serviceClassName %> } from './<%= serviceFileName %>';
 
-  @Post()
-  create(@Body() create<%= singular(classify(name)) %>Dto: Create<%= singular(classify(name)) %>Dto) {
-    return this.<%= lowercased(name) %>Service.create(create<%= singular(classify(name)) %>Dto);
-  }
+@Controller('<%= controllerName %>')
+export class <%= controllerClassName %> {
+  constructor(private <%= serviceVarName %>: <%= serviceClassName %>) {}
 
-  @Get()
-  findAll() {
-    return this.<%= lowercased(name) %>Service.findAll();
-  }
+@Post()
+@Auth([])
+@HttpCode(HttpStatus.CREATED)
+async <%= createFunctionName %>(@Body() <%= createDtoVarName %>: <%= createDtoClassName %>) {
+  const entity = await this.<%= serviceVarName %>.<%= createFunctionName %>(<%= createDtoVarName %>);
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.<%= lowercased(name) %>Service.findOne(+id);
-  }
+  return entity.toDto();
+}
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() update<%= singular(classify(name)) %>Dto: Update<%= singular(classify(name)) %>Dto) {
-    return this.<%= lowercased(name) %>Service.update(+id, update<%= singular(classify(name)) %>Dto);
-  }
+@Get()
+@Auth([])
+@HttpCode(HttpStatus.OK)
+<%= getAllFunctionName %>(@Query() <%= pageOptionsDtoVarName %>: <%= pageOptionsDtoClassName %>): Promise<PageDto<<%= dtoClassName %>>> {
+  return this.<%= serviceVarName %>.<%= getAllFunctionName %>(<%= pageOptionsDtoVarName %>);
+}
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.<%= lowercased(name) %>Service.remove(+id);
-  }<% } else if (type === 'microservice' && crud) { %>
+@Get(':id')
+@Auth([])
+@HttpCode(HttpStatus.OK)
+async <%= getSingleFunctionName %>(@UUIDParam('id') id: Uuid): Promise<<%= dtoClassName %>> {
+  const entity = await this.<%= serviceVarName %>.<%= getSingleFunctionName %>(id);
 
-  @MessagePattern('create<%= singular(classify(name)) %>')
-  create(@Payload() create<%= singular(classify(name)) %>Dto: Create<%= singular(classify(name)) %>Dto) {
-    return this.<%= lowercased(name) %>Service.create(create<%= singular(classify(name)) %>Dto);
-  }
+  return entity.toDto();
+}
 
-  @MessagePattern('findAll<%= classify(name) %>')
-  findAll() {
-    return this.<%= lowercased(name) %>Service.findAll();
-  }
+@Put(':id')
+@HttpCode(HttpStatus.ACCEPTED)
+<%= updateFunctionName %>(
+@UUIDParam('id') id: Uuid,
+  @Body() <%= updateDtoVarName %>: <%= updateDtoClassName %>,
+): Promise<void> {
+  return this.<%= serviceVarName %>.<%= updateFunctionName %>(id, <%= updateDtoVarName %>);
+}
 
-  @MessagePattern('findOne<%= singular(classify(name)) %>')
-  findOne(@Payload() id: number) {
-    return this.<%= lowercased(name) %>Service.findOne(id);
-  }
-
-  @MessagePattern('update<%= singular(classify(name)) %>')
-  update(@Payload() update<%= singular(classify(name)) %>Dto: Update<%= singular(classify(name)) %>Dto) {
-    return this.<%= lowercased(name) %>Service.update(update<%= singular(classify(name)) %>Dto.id, update<%= singular(classify(name)) %>Dto);
-  }
-
-  @MessagePattern('remove<%= singular(classify(name)) %>')
-  remove(@Payload() id: number) {
-    return this.<%= lowercased(name) %>Service.remove(id);
-  }<% } %>
+@Delete(':id')
+@HttpCode(HttpStatus.ACCEPTED)
+async <%= deleteFunctionName %>(@UUIDParam('id') id: Uuid): Promise<void> {
+  await this.<%= serviceVarName %>.<%= deleteFunctionName %>(id);
+}
 }
