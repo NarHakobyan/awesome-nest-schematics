@@ -1,11 +1,11 @@
 {
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
-    "class": {
-      "factory": "./lib/class/class.factory#main",
-      "description": "Create a new class.",
-      "schema": "./lib/class/schema.json",
-      "aliases": ["cl"]
+    "dto": {
+      "factory": "./lib/dto/dto.factory#main",
+      "description": "Create a new dto.",
+      "schema": "./lib/dto/schema.json",
+      "aliases": ["dt"]
     },
     "controller": {
       "factory": "./lib/controller/controller.factory#main",

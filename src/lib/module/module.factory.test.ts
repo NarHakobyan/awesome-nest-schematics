@@ -159,25 +159,6 @@ describe('Module Factory', () => {
         'export class FooModule {}\n',
     );
   });
-  it('should manage javascript file', async () => {
-    const options: ModuleOptions = {
-      name: 'foo',
-      skipImport: true,
-      language: 'js',
-    };
-    const tree: UnitTestTree = await runner.runSchematic('module', options);
-
-    const files: string[] = tree.files;
-    expect(
-      files.find((filename) => filename === '/foo/foo.module.js'),
-    ).not.toBeUndefined();
-    expect(tree.readContent('/foo/foo.module.js')).toEqual(
-      "import { Module } from '@nestjs/common';\n" +
-        '\n' +
-        '@Module({})\n' +
-        'export class FooModule {}\n',
-    );
-  });
   it('should manage declaration in app module', async () => {
     const app: ApplicationOptions = {
       name: '',

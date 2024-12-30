@@ -26,10 +26,6 @@ export interface ServiceOptions {
    */
   type?: string;
   /**
-   * Application language.
-   */
-  language?: string;
-  /**
    * The source root path
    */
   sourceRoot?: string;

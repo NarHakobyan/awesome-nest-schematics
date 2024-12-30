@@ -113,22 +113,4 @@ describe('Decorator Factory', () => {
         "export const Foo = (...args: string[]) => SetMetadata('_foo', args);\n",
     );
   });
-  it('should manage javascript file', async () => {
-    const options: DecoratorOptions = {
-      name: 'foo',
-      language: 'js',
-      flat: false,
-    };
-    const tree: UnitTestTree = await runner.runSchematic('decorator', options);
-
-    const files: string[] = tree.files;
-    expect(
-      files.find((filename) => filename === '/foo/foo.decorator.js'),
-    ).not.toBeUndefined();
-    expect(tree.readContent('/foo/foo.decorator.js')).toEqual(
-      "import { SetMetadata } from '@nestjs/common';\n" +
-        '\n' +
-        "export const Foo = (...args) => SetMetadata('foo', args);\n",
-    );
-  });
 });

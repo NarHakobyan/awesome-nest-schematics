@@ -149,30 +149,6 @@ describe('Gateway Factory', () => {
         '}\n',
     );
   });
-  it('should manage javascript file', async () => {
-    const options: GatewayOptions = {
-      name: 'foo',
-      language: 'js',
-      flat: false,
-    };
-    const tree: UnitTestTree = await runner.runSchematic('gateway', options);
-
-    const files: string[] = tree.files;
-    expect(
-      files.find((filename) => filename === '/foo/foo.gateway.js'),
-    ).not.toBeUndefined();
-    expect(tree.readContent('/foo/foo.gateway.js')).toEqual(
-      "import { SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';\n" +
-        '\n' +
-        '@WebSocketGateway()\n' +
-        'export class FooGateway {\n' +
-        "  @SubscribeMessage('message')\n" +
-        '  handleMessage(client, payload) {\n' +
-        "    return 'Hello world!';\n" +
-        '  }\n' +
-        '}\n',
-    );
-  });
   it('should create a spec file', async () => {
     const options: GatewayOptions = {
       name: 'foo',

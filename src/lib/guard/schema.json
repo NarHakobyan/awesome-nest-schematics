@@ -29,7 +29,7 @@
     },
     "spec": {
       "type": "boolean",
-      "default": true,
+      "default": false,
       "description": "Specifies if a spec file is generated."
     },
     "specFileSuffix": {

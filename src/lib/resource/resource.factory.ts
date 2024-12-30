@@ -54,12 +54,7 @@ function transform(options: ResourceOptions): ResourceOptions {
   const location: Location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
   target.path = normalizeToKebabOrSnakeCase(location.path);
-  target.language = target.language !== undefined ? target.language : 'ts';
-  if (target.language === 'js') {
-    throw new Error(
-      'The "resource" schematic does not support JavaScript language (only TypeScript is supported).',
-    );
-  }
+
   target.specFileSuffix = normalizeToKebabOrSnakeCase(
     options.specFileSuffix || 'spec',
   );
@@ -74,7 +69,7 @@ function transform(options: ResourceOptions): ResourceOptions {
 
 function generate(options: ResourceOptions): Source {
   return (context: SchematicContext) =>
-    apply(url(join('./files' as Path, options.language)), [
+    apply(url('./files'), [
       filter((path) => {
         if (path.endsWith('.dto.ts')) {
           return (
@@ -122,8 +117,7 @@ function generate(options: ResourceOptions): Source {
       options.spec
         ? noop()
         : filter((path) => {
-            const suffix = `.__specFileSuffix__.ts`;
-            return !path.endsWith(suffix)
+            return !path.endsWith(`.__specFileSuffix__.ts`)
         }),
       template({
         ...strings,

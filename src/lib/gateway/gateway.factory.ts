@@ -53,7 +53,6 @@ function transform(options: GatewayOptions): GatewayOptions {
   const location: Location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
   target.path = normalizeToKebabOrSnakeCase(location.path);
-  target.language = target.language !== undefined ? target.language : 'ts';
 
   target.path = target.flat
     ? target.path
@@ -63,15 +62,11 @@ function transform(options: GatewayOptions): GatewayOptions {
 
 function generate(options: GatewayOptions): Source {
   return (context: SchematicContext) =>
-    apply(url(join('./files' as Path, options.language)), [
+    apply(url('./files'), [
       options.spec ? noop() : filter((path) => !path.endsWith('.spec.ts')),
-      options.spec 
-        ? noop() 
-        : filter((path) => {
-            const languageExtension = options.language || 'ts';
-            const suffix = `.__specFileSuffix__.${languageExtension}`;
-            return !path.endsWith(suffix)
-        }),
+      options.spec
+        ? noop()
+        : filter((path) => !path.endsWith(`.__specFileSuffix__.ts`)),
       template({
         ...strings,
         ...options,

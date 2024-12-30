@@ -168,31 +168,6 @@ describe('Interceptor Factory', () => {
     );
   });
 
-  it('should manage javascript file', async () => {
-    const options: InterceptorOptions = {
-      name: 'foo',
-      language: 'js',
-    };
-    const tree: UnitTestTree = await runner.runSchematic(
-      'interceptor',
-      options,
-    );
-
-    const files: string[] = tree.files;
-    expect(
-      files.find((filename) => filename === '/foo.interceptor.js'),
-    ).toBeDefined();
-    expect(tree.readContent('/foo.interceptor.js')).toEqual(
-      "import { Injectable } from '@nestjs/common';\n" +
-        '\n' +
-        '@Injectable()\n' +
-        'export class FooInterceptor {\n' +
-        '  intercept(context, next) {\n' +
-        '    return next.handle();\n' +
-        '  }\n' +
-        '}\n',
-    );
-  });
   it('should create a spec file', async () => {
     const options: InterceptorOptions = {
       name: 'foo',

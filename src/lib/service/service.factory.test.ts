@@ -143,29 +143,6 @@ describe('Service Factory', () => {
         'export class FooService {}\n',
     );
   });
-  it('should manage javascript file', async () => {
-    const options: ServiceOptions = {
-      name: 'foo',
-      skipImport: true,
-      language: 'js',
-      flat: true,
-    };
-    const tree: UnitTestTree = await runner.runSchematic('service', options);
-
-    const files: string[] = tree.files;
-    expect(
-      files.find((filename) => filename === '/foo.service.js'),
-    ).toBeDefined();
-    expect(
-      files.find((filename) => filename === '/foo.service.spec.js'),
-    ).toBeDefined();
-    expect(tree.readContent('/foo.service.js')).toEqual(
-      "import { Injectable } from '@nestjs/common';\n" +
-        '\n' +
-        '@Injectable()\n' +
-        'export class FooService {}\n',
-    );
-  });
   it('should manage declaration in app module', async () => {
     const app: ApplicationOptions = {
       name: '',

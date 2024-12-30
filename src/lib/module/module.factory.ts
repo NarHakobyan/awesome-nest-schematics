@@ -42,7 +42,6 @@ function transform(source: ModuleOptions): ModuleOptions {
   const location: Location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
   target.path = normalizeToKebabOrSnakeCase(location.path);
-  target.language = target.language !== undefined ? target.language : 'ts';
 
   target.path = target.flat
     ? target.path
@@ -52,7 +51,7 @@ function transform(source: ModuleOptions): ModuleOptions {
 
 function generate(options: ModuleOptions) {
   return (context: SchematicContext) =>
-    apply(url(join('./files' as Path, options.language)), [
+    apply(url('./files'), [
       template({
         ...strings,
         ...options,

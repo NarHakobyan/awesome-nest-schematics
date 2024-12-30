@@ -3,20 +3,20 @@ import {
   UnitTestTree,
 } from '@angular-devkit/schematics/testing';
 import * as path from 'path';
-import { ClassOptions } from './class.schema';
+import { DtoOptions } from './dto.schema';
 
-describe('Class Factory', () => {
+describe('Dto Factory', () => {
   const runner: SchematicTestRunner = new SchematicTestRunner(
     '.',
     path.join(process.cwd(), 'src/collection.json'),
   );
   it('should manage name only', async () => {
-    const options: ClassOptions = {
+    const options: DtoOptions = {
       name: 'foo',
       spec: true,
       flat: true,
     };
-    const tree: UnitTestTree = await runner.runSchematic('class', options);
+    const tree: UnitTestTree = await runner.runSchematic('dto', options);
 
     const files: string[] = tree.files;
 
@@ -26,12 +26,12 @@ describe('Class Factory', () => {
     expect(tree.readContent('/foo.ts')).toEqual('export class Foo {}\n');
   });
   it('should manage name as a path', async () => {
-    const options: ClassOptions = {
+    const options: DtoOptions = {
       name: 'bar/foo',
       flat: false,
       spec: false,
     };
-    const tree: UnitTestTree = await runner.runSchematic('class', options);
+    const tree: UnitTestTree = await runner.runSchematic('dto', options);
 
     const files: string[] = tree.files;
 
@@ -43,13 +43,13 @@ describe('Class Factory', () => {
     );
   });
   it('should manage name and path', async () => {
-    const options: ClassOptions = {
+    const options: DtoOptions = {
       name: 'foo',
       path: 'baz',
       flat: false,
       spec: false,
     };
-    const tree: UnitTestTree = await runner.runSchematic('class', options);
+    const tree: UnitTestTree = await runner.runSchematic('dto', options);
 
     const files: string[] = tree.files;
     expect(
@@ -60,12 +60,12 @@ describe('Class Factory', () => {
     );
   });
   it('should manage name to normalize', async () => {
-    const options: ClassOptions = {
+    const options: DtoOptions = {
       name: '_fooBar',
       flat: false,
       spec: false,
     };
-    const tree: UnitTestTree = await runner.runSchematic('class', options);
+    const tree: UnitTestTree = await runner.runSchematic('dto', options);
 
     const files: string[] = tree.files;
     expect(
@@ -76,12 +76,12 @@ describe('Class Factory', () => {
     );
   });
   it('should manage path to normalize', async () => {
-    const options: ClassOptions = {
+    const options: DtoOptions = {
       name: 'barBaz/_foo',
       spec: false,
       flat: false,
     };
-    const tree: UnitTestTree = await runner.runSchematic('class', options);
+    const tree: UnitTestTree = await runner.runSchematic('dto', options);
 
     const files: string[] = tree.files;
     expect(
@@ -91,28 +91,14 @@ describe('Class Factory', () => {
       'export class Foo {}\n',
     );
   });
-  it('should manage javascript file', async () => {
-    const options: ClassOptions = {
-      name: 'foo',
-      language: 'js',
-      flat: false,
-      spec: false,
-    };
-    const tree: UnitTestTree = await runner.runSchematic('class', options);
 
-    const files: string[] = tree.files;
-    expect(
-      files.find((filename) => filename === '/foo/foo.js'),
-    ).not.toBeUndefined();
-    expect(tree.readContent('/foo/foo.js')).toEqual('export class Foo {}\n');
-  });
   it('should remove . from name', async () => {
-    const options: ClassOptions = {
+    const options: DtoOptions = {
       name: 'foo.entity',
       spec: true,
       flat: true,
     };
-    const tree: UnitTestTree = await runner.runSchematic('class', options);
+    const tree: UnitTestTree = await runner.runSchematic('dto', options);
 
     const files: string[] = tree.files;
 
@@ -124,12 +110,12 @@ describe('Class Factory', () => {
     );
   });
   it('should create a spec file', async () => {
-    const options: ClassOptions = {
+    const options: DtoOptions = {
       name: 'foo',
       spec: true,
       flat: true,
     };
-    const tree: UnitTestTree = await runner.runSchematic('class', options);
+    const tree: UnitTestTree = await runner.runSchematic('dto', options);
 
     const files: string[] = tree.files;
 
@@ -138,13 +124,13 @@ describe('Class Factory', () => {
     ).not.toBeUndefined();
   });
   it('should create a spec file with custom file suffix', async () => {
-    const options: ClassOptions = {
+    const options: DtoOptions = {
       name: 'foo',
       spec: true,
       specFileSuffix: 'test',
       flat: true,
     };
-    const tree: UnitTestTree = await runner.runSchematic('class', options);
+    const tree: UnitTestTree = await runner.runSchematic('dto', options);
 
     const files: string[] = tree.files;
 

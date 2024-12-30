@@ -69,7 +69,7 @@ body:
     attributes:
       label: "Package version"
       description: |
-        Which version of `@nestjs/schematics` are you using?
+        Which version of `awesome-nest-schematics` are you using?
         **Tip**: Make sure that all of yours `@nestjs/*` dependencies are in sync!
       placeholder: "8.1.3"
 

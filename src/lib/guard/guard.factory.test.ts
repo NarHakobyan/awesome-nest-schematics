@@ -162,28 +162,6 @@ describe('Guard Factory', () => {
     );
   });
 
-  it('should manage javascript file', async () => {
-    const options: GuardOptions = {
-      name: 'foo',
-      language: 'js',
-    };
-    const tree: UnitTestTree = await runner.runSchematic('guard', options);
-
-    const files: string[] = tree.files;
-    expect(
-      files.find((filename) => filename === '/foo.guard.js'),
-    ).not.toBeUndefined();
-    expect(tree.readContent('/foo.guard.js')).toEqual(
-      "import { Injectable } from '@nestjs/common';\n" +
-        '\n' +
-        '@Injectable()\n' +
-        'export class FooGuard {\n' +
-        '  canActivate(context) {\n' +
-        '    return true;\n' +
-        '  }\n' +
-        '}\n',
-    );
-  });
   it('should create a spec file', async () => {
     const options: GuardOptions = {
       name: 'foo',

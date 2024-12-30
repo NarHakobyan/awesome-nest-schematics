@@ -56,7 +56,6 @@ function transform(options: ProviderOptions): ProviderOptions {
   }
 
   target.path = normalizeToKebabOrSnakeCase(location.path);
-  target.language = target.language !== undefined ? target.language : 'ts';
 
   target.path = target.flat
     ? target.path
@@ -66,13 +65,11 @@ function transform(options: ProviderOptions): ProviderOptions {
 
 function generate(options: ProviderOptions) {
   return (context: SchematicContext) =>
-    apply(url(join('./files' as Path, options.language)), [
-      options.spec 
-        ? noop() 
+    apply(url('./files'), [
+      options.spec
+        ? noop()
         : filter((path) => {
-            const languageExtension = options.language || 'ts';
-            const suffix = `.__specFileSuffix__.${languageExtension}`;
-            return !path.endsWith(suffix)
+            return !path.endsWith(`.__specFileSuffix__.ts`)
         }),
       template({
         ...strings,

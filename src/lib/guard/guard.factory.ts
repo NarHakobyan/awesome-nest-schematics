@@ -31,7 +31,6 @@ function transform(options: GuardOptions): GuardOptions {
   const location: Location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
   target.path = normalizeToKebabOrSnakeCase(location.path);
-  target.language = target.language !== undefined ? target.language : 'ts';
   target.specFileSuffix = normalizeToKebabOrSnakeCase(
     options.specFileSuffix || 'spec',
   );
@@ -44,14 +43,10 @@ function transform(options: GuardOptions): GuardOptions {
 
 function generate(options: GuardOptions): Source {
   return (context: SchematicContext) =>
-    apply(url(join('./files' as Path, options.language)), [
-      options.spec 
-        ? noop() 
-        : filter((path) => {
-            const languageExtension = options.language || 'ts';
-            const suffix = `.__specFileSuffix__.${languageExtension}`;
-            return !path.endsWith(suffix)
-        }),
+    apply(url('./files'), [
+      options.spec
+        ? noop()
+        : filter((path) => !path.endsWith(`.__specFileSuffix__.ts`)),
       template({
         ...strings,
         ...options,

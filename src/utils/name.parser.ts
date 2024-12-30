@@ -20,7 +20,7 @@ export class NameParser {
     );
     return {
       name: nameWithoutPath,
-      path: normalize('/'.concat(namePath)),
+      path: normalize('/modules/'.concat(namePath)),
     };
   }
 }

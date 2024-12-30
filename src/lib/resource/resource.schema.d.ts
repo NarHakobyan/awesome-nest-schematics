@@ -14,10 +14,6 @@ export interface ResourceOptions {
    */
   sourceRoot?: string;
   /**
-   * Application language.
-   */
-  language?: string;
-  /**
    * Specifies if spec files are generated.
    */
   spec?: boolean;

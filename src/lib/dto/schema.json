@@ -1,17 +1,17 @@
 {
-  "$schema": "http://json-schema.org/schema",
-  "$id": "SchematicsNestClass",
-  "title": "Nest Class Options Schema",
+  "$schema": "https://json-schema.org/schema",
+  "$id": "SchematicsNestDto",
+  "title": "Nest Dto Options Schema",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "The name of the class.",
+      "description": "The name of the dto.",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use for the class?"
+      "x-prompt": "What name would you like to use for the dto?"
     },
     "flat": {
       "type": "boolean",
@@ -20,7 +20,7 @@
     },
     "spec": {
       "type": "boolean",
-      "default": true,
+      "default": false,
       "description": "Specifies if a spec file is generated."
     },
     "specFileSuffix": {
@@ -31,16 +31,17 @@
     "path": {
       "type": "string",
       "format": "path",
-      "description": "The path to create the class."
+      "description": "Specifies the declaring module.",
+      "x-prompt": "What module would you like to use for the dto?"
     },
     "sourceRoot": {
       "type": "string",
       "description": "Nest controller source root directory."
     },
-    "className": {
+    "dtoName": {
       "type": "string",
-      "description": "Class name to be used internally."
+      "description": "Dto name to be used internally."
     }
   },
-  "required": ["name"]
+  "required": ["name", "path"]
 }

@@ -1,14 +1,12 @@
-import { Path } from '@angular-devkit/core';
-
-export interface ClassOptions {
+export interface DtoOptions {
   /**
-   * The name of the class.
+   * The name of the dto.
    */
   name: string;
   /**
-   * The path to create the class.
+   * The module to create the dto.
    */
-  path?: string | Path;
+  path?: string;
   /**
    * The source root path.
    */
@@ -27,7 +25,7 @@ export interface ClassOptions {
    */
   flat?: boolean;
   /**
-   * Class name to be used internally.
+   * Dto name to be used internally.
    */
-  className?: string;
+  dtoName?: string;
 }

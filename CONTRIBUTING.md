@@ -66,13 +66,13 @@ A minimal reproduce scenario using a repository or Gist allows us to quickly con
 
 Unfortunately, we are not able to investigate / fix bugs without a minimal reproduction, so if we don't hear back from you we are going to close an issue that don't have enough info to be reproduced.
 
-You can file new issues by filling out our [new issue form](https://github.com/nestjs/schematics/issues/new).
+You can file new issues by filling out our [new issue form](https://github.com/NarHakobyan/awesome-nest-schematics/issues/new).
 
 
 ### <a name="submit-pr"></a> Submitting a Pull Request (PR)
 Before you submit your Pull Request (PR) consider the following guidelines:
 
-1. Search [GitHub](https://github.com/nestjs/schematics/pulls) for an open or closed PR
+1. Search [GitHub](https://github.com/NarHakobyan/awesome-nest-schematics/pulls) for an open or closed PR
   that relates to your submission. You don't want to duplicate effort.
 <!-- 1. Please sign our [Contributor License Agreement (CLA)](#cla) before sending PRs.
   We cannot accept code without this. -->

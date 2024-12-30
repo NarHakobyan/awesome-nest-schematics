@@ -1,7 +1,7 @@
 {
   "name": "awesome-nestjs-schematics",
-  "version": "10.2.3",
-  "description": "Nest - modern, fast, powerful node.js web framework (@schematics)",
+  "version": "10.0.0",
+  "description": "Awesome NestJS Schematics, designed and developed for Awesome Nest Boilerplate",
   "main": "dist/index.js",
   "files": [
     "dist/**/*"
@@ -28,18 +28,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nestjs/schematics.git"
+    "url": "git+https://github.com/NarHakobyan/awesome-nest-schematics.git"
   },
   "contributors": [
-    "ThomRick",
-    "Kamil Mysliwiec",
-    "John Biundo"
+    "Narek Hakobyan"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nestjs/schematics/issues"
+    "url": "https://github.com/NarHakobyan/awesome-nest-schematics/issues"
   },
-  "homepage": "https://github.com/nestjs/schematics#readme",
+  "homepage": "https://github.com/NarHakobyan/awesome-nest-schematics#readme",
   "dependencies": {
     "@angular-devkit/core": "17.3.11",
     "@angular-devkit/schematics": "17.3.11",

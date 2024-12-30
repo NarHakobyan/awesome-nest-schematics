@@ -76,33 +76,6 @@ describe('SubApp Factory', () => {
       ].sort(),
     );
   });
-  it('should manage javascript files', async () => {
-    const options: SubAppOptions = {
-      name: 'project',
-      language: 'js',
-    };
-    const tree: UnitTestTree = await runner.runSchematic('sub-app', options);
-
-    const files: string[] = tree.files;
-    expect(files.sort()).toEqual(
-      [
-        '/nest-cli.json',
-        '/apps/nestjs-schematics/.babelrc',
-        '/apps/nestjs-schematics/index.js',
-        '/apps/nestjs-schematics/jsconfig.json',
-        '/apps/project/.babelrc',
-        '/apps/project/index.js',
-        '/apps/project/jsconfig.json',
-        '/apps/project/src/app.controller.js',
-        '/apps/project/src/app.controller.spec.js',
-        '/apps/project/src/app.module.js',
-        '/apps/project/src/app.service.js',
-        '/apps/project/src/main.js',
-        '/apps/project/test/app.e2e-spec.js',
-        '/apps/project/test/jest-e2e.json',
-      ].sort(),
-    );
-  });
   it('should generate spec files with custom suffix', async () => {
     const options: SubAppOptions = {
       name: 'project',

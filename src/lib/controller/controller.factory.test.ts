@@ -147,28 +147,7 @@ describe('Controller Factory', () => {
         'export class FooController {}\n',
     );
   });
-  it('should manage javascript file', async () => {
-    const options: ControllerOptions = {
-      name: 'foo',
-      language: 'js',
-      skipImport: true,
-    };
-    const tree: UnitTestTree = await runner.runSchematic('controller', options);
 
-    const files: string[] = tree.files;
-    expect(
-      files.find((filename) => filename === '/foo/foo.controller.js'),
-    ).toBeDefined();
-    expect(
-      files.find((filename) => filename === '/foo/foo.controller.spec.js'),
-    ).toBeDefined();
-    expect(tree.readContent('/foo/foo.controller.js')).toEqual(
-      "import { Controller } from '@nestjs/common';\n" +
-        '\n' +
-        "@Controller('foo')\n" +
-        'export class FooController {}\n',
-    );
-  });
   it('should manage declaration in app module', async () => {
     const app: ApplicationOptions = {
       name: '',

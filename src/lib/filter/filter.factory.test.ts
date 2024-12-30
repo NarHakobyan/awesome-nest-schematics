@@ -132,51 +132,6 @@ describe('Filter Factory', () => {
     );
   });
 
-  it('should manage javascript file', async () => {
-    const options: FilterOptions = {
-      name: 'foo',
-      language: 'js',
-    };
-    const tree: UnitTestTree = await runner.runSchematic('filter', options);
-
-    const files: string[] = tree.files;
-    expect(
-      files.find((filename) => filename === '/foo.filter.js'),
-    ).toBeDefined();
-    expect(tree.readContent('/foo.filter.js')).toEqual(
-      "import { Catch } from '@nestjs/common';\n" +
-        '\n' +
-        '@Catch()\n' +
-        'export class FooFilter {\n' +
-        '  catch(exception, host) {}\n' +
-        '}\n',
-    );
-  });
-
-  it('should add source root to path', async () => {
-    const options: FilterOptions = {
-      name: 'foo',
-      language: 'js',
-    };
-    let tree: UnitTestTree = await runner.runSchematic('application', {
-      name: '',
-    });
-
-    tree = await runner.runSchematic('filter', options, tree);
-
-    const files: string[] = tree.files;
-    expect(
-      files.find((filename) => filename === '/src/foo.filter.js'),
-    ).toBeDefined();
-    expect(tree.readContent('/src/foo.filter.js')).toEqual(
-      "import { Catch } from '@nestjs/common';\n" +
-        '\n' +
-        '@Catch()\n' +
-        'export class FooFilter {\n' +
-        '  catch(exception, host) {}\n' +
-        '}\n',
-    );
-  });
   it('should create a spec file', async () => {
     const options: FilterOptions = {
       name: 'foo',

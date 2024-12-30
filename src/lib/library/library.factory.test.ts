@@ -61,23 +61,4 @@ describe('Library Factory', () => {
       '/libs/_project/src/_project.service.ts',
     ]);
   });
-  it('should manage javascript files', async () => {
-    const options: LibraryOptions = {
-      name: 'project',
-      language: 'js',
-      prefix: 'app',
-    };
-    const tree: UnitTestTree = await runner.runSchematic('library', options);
-
-    const files: string[] = tree.files;
-    expect(files).toEqual([
-      '/nest-cli.json',
-      '/libs/project/.babelrc',
-      '/libs/project/jsconfig.json',
-      '/libs/project/src/index.js',
-      '/libs/project/src/project.module.js',
-      '/libs/project/src/project.service.js',
-      '/libs/project/src/project.service.spec.js',
-    ]);
-  });
 });

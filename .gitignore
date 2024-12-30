@@ -8,7 +8,6 @@ schematics/
 dist
 
 src/lib/**/*.js
-src/lib/**/*.d.ts
 !src/lib/resource/*.d.ts
 !src/lib/**/files/**/*
 !src/lib/**/workspace/**/*

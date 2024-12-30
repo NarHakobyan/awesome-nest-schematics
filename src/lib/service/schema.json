@@ -24,12 +24,12 @@
     },
     "flat": {
       "type": "boolean",
-      "default": false,
+      "default": true,
       "description": "Flag to indicate if a directory is created."
     },
     "spec": {
       "type": "boolean",
-      "default": true,
+      "default": false,
       "description": "Specifies if a spec file is generated."
     },
     "specFileSuffix": {

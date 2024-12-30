@@ -10,10 +10,6 @@ export interface FilterOptions {
    */
   path?: string | Path;
   /**
-   * Application language.
-   */
-  language?: string;
-  /**
    * The source root path
    */
   sourceRoot?: string;

@@ -48,27 +48,6 @@ describe('Configuration Factory', () => {
       sourceRoot: 'src',
     });
   });
-  it('should manage provided language input', async () => {
-    const options: ConfigurationOptions = {
-      project: 'project',
-      language: 'js',
-    };
-    const tree: UnitTestTree = await runner.runSchematic(
-      'configuration',
-      options,
-    );
-
-    const files: string[] = tree.files;
-    expect(
-      files.find((filename) => filename === '/project/nest-cli.json'),
-    ).not.toBeUndefined();
-    expect(JSON.parse(tree.readContent('/project/nest-cli.json'))).toEqual({
-      $schema: 'https://json.schemastore.org/nest-cli',
-      language: 'js',
-      collection: '@nestjs/schematics',
-      sourceRoot: 'src',
-    });
-  });
   it('should manage provided collection input', async () => {
     const options: ConfigurationOptions = {
       project: 'project',

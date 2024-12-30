@@ -17,7 +17,7 @@ export function main(options: ConfigurationOptions): Rule {
 function transform(options: ConfigurationOptions): ConfigurationOptions {
   const target: ConfigurationOptions = Object.assign({}, options);
   target.collection =
-    target.collection !== undefined ? target.collection : '@nestjs/schematics';
+    target.collection !== undefined ? target.collection : 'awesome-nest-schematics';
   return target;
 }
 
