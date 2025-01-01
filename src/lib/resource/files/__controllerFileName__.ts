@@ -11,12 +11,12 @@ import {
 } from '@nestjs/common';
 
 import type { PageDto } from '../../common/dto/page.dto';
-import { Auth, UUIDParam } from '../../decorators';
-import { <%= createDtoClassName %> } from './dtos/<%= createDtoFileName %>';
-import type { <%= dtoClassName %> } from './dtos/<%= dtoFileName %>';
-import { <%= pageOptionsDtoClassName %> } from './dtos/<%= pageOptionsDtoFileName %>';
-import { <%= updateDtoClassName %> } from './dtos/<%= updateDtoFileName %>';
-import { <%= serviceClassName %> } from './<%= serviceFileName %>';
+import { <%= createDtoClassName %> } from './dto/<%= createDtoFileName %>.ts';
+import type { <%= dtoClassName %> } from './dto/<%= dtoFileName %>.ts';
+import { <%= pageOptionsDtoClassName %> } from './dto/<%= pageOptionsDtoFileName %>.ts';
+import { <%= updateDtoClassName %> } from './dto/<%= updateDtoFileName %>.ts';
+import { <%= serviceClassName %> } from './<%= serviceFileName %>.ts';
+import { Auth, UUIDParam } from '../../decorators/http.decorators.ts';
 
 @Controller('<%= controllerName %>')
 export class <%= controllerClassName %> {

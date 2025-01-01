@@ -22,11 +22,10 @@ export function generate(name: string) {
     entityFileName: toEntityFileName(name),
     translationEntityFileName: toTranslationEntityFileName(name),
     translationDtoFileName: toTranslationDtoFileName(name),
-    repositoryFileName: toRepositoryFileName(name),
-    translationRepositoryFileName: toTranslationRepositoryFileName(name),
     createCommandFileName: toCreateCommandFileName(name),
     getQueryFileName: toGetQueryFileName(name),
     getHandlerFileName: toGetHandlerFileName(name),
+    createHandlerFileName: toCreateHandlerFileName(name),
     controllerFileName: toControllerFileName(name),
     dtoFileName: toDtoFileName(name),
     notFoundExceptionFileName: toNotFoundExceptionFileName(name),
@@ -38,8 +37,6 @@ export function generate(name: string) {
     className: toClassName(name),
     tableName: toTableName(name),
     translationsTableName: toTableName(name) + '_translations',
-    repositoryClassName: toRepositoryClassName(name),
-    translationRepositoryClassName: toTranslationRepositoryClassName(name),
     fileName: toFileName(name),
     controllerName: toControllerName(name),
     serviceVarName: inflection.camelize(toServiceClassName(name), true),
@@ -48,15 +45,16 @@ export function generate(name: string) {
     updateDtoVarName: inflection.camelize(toUpdateDtoClassName(name), true),
     repositoryVarName: inflection.camelize(toRepositoryClassName(name), true),
     tableAliasName: toTableName(inflection.singularize(name)),
-    foreignKeyFieldName: inflection.titleize(inflection.singularize(name)) + 'Id',
-    foreignKeyColumnName: inflection.underscore(inflection.singularize(name)) + '_id',
+    foreignKeyFieldName: inflection.camelize(inflection.singularize(name) + 'Id', true),
+    fieldName: inflection.camelize(inflection.singularize(name), true),
+    foreignKeyColumnName: inflection.underscore(inflection.singularize(name) + '_id'),
     translationEntityVarName: inflection.camelize(toTranslationEntityClassName(name), true),
     translationRepositoryVarName: inflection.camelize(toTranslationRepositoryClassName(name), true),
-    createFunctionName: 'create' + toClassName(name),
-    updateFunctionName: 'update' + toClassName(name),
-    deleteFunctionName: 'delete' + toClassName(name),
-    getSingleFunctionName: 'get' + toClassName(name),
-    getAllFunctionName: 'getAll' + toClassName(name),
+    createFunctionName: 'create' + changeCase.pascalCase(inflection.singularize(name)),
+    updateFunctionName: 'update' + changeCase.pascalCase(inflection.singularize(name)),
+    deleteFunctionName: 'delete' + changeCase.pascalCase(inflection.singularize(name)),
+    getSingleFunctionName: 'get' + changeCase.pascalCase(inflection.singularize(name)),
+    getAllFunctionName: 'get' + changeCase.pascalCase(inflection.pluralize(name)),
   }
 }
 
@@ -110,58 +108,58 @@ export function toNotFoundExceptionClassName(name): string {
   return toClassName(name) + 'NotFoundException';
 }
 export function toEntityFileName(name): string {
-  return `${toFileName(name)}.entity.ts`;
+  return `${toFileName(name)}.entity`;
 }
 export function toTranslationEntityFileName(name): string {
-  return `${toFileName(name)}-translation.entity.ts`;
+  return `${toFileName(name)}-translation.entity`;
 }
 export function toTranslationDtoFileName(name): string {
-  return `${toFileName(name)}-translation.dto.ts`;
+  return `${toFileName(name)}-translation.dto`;
 }
 export function toRepositoryFileName(name): string {
-  return `${toFileName(name)}.repository.ts`;
+  return `${toFileName(name)}.repository`;
 }
 export function toTranslationRepositoryFileName(name): string {
-  return `${toFileName(name)}-translation.repository.ts`;
+  return `${toFileName(name)}-translation.repository`;
 }
 export function toCreateCommandFileName(name: string) {
-  return `create-${toFileName(name)}.command.ts`;
+  return `create-${toFileName(name)}.command`;
 }
 export function toCreateHandlerFileName(name: string) {
-  return `create-${toFileName(name)}.handler.ts`;
+  return `create-${toFileName(name)}.handler`;
 }
 export function toGetQueryFileName(name: string) {
-  return `get-${toFileName(name)}.query.ts`;
+  return `get-${toFileName(name)}.query`;
 }
 export function toGetHandlerFileName(name: string) {
-  return `get-${toFileName(name)}.handler.ts`;
+  return `get-${toFileName(name)}.handler`;
 }
 export function toControllerFileName(name: string) {
-  return `${toFileName(name)}.controller.ts`;
+  return `${toFileName(name)}.controller`;
 }
 export function toDtoFileName(name: string) {
-  return `${toFileName(name)}.dto.ts`;
+  return `${toFileName(name)}.dto`;
 }
 export function toNotFoundExceptionFileName(name: string) {
-  return `${toFileName(name)}-not-found.exception.ts`;
+  return `${toFileName(name)}-not-found.exception`;
 }
 export function toCreateDtoFileName(name: string) {
-  return `create-${toFileName(name)}.dto.ts`;
+  return `create-${toFileName(name)}.dto`;
 }
 export function toUpdateDtoFileName(name: string) {
-  return `update-${toFileName(name)}.dto.ts`;
+  return `update-${toFileName(name)}.dto`;
 }
 export function toPageOptionsDtoFileName(name: string) {
-  return `${toFileName(name)}-page-options.dto.ts`;
+  return `${toFileName(name)}-page-options.dto`;
 }
 export function toServiceFileName(name: string) {
-  return `${toFileName(name)}.service.ts`;
+  return `${toFileName(name)}.service`;
 }
 export function toModuleFileName(name: string) {
-  return `${toFileName(name)}.module.ts`;
+  return `${toFileName(name)}.module`;
 }
 export function toClassName(name: string) {
-  return changeCase.pascalCase(name);
+  return changeCase.pascalCase(inflection.singularize(name));
 }
 export function toTableName(name: string) {
   return inflection.underscore(inflection.pluralize(name));
@@ -176,5 +174,5 @@ export function toTranslationRepositoryClassName(name: string) {
   return `${toClassName(name)}TranslationRepository`;
 }
 export function toFileName(name: string) {
-  return inflection.dasherize(name.toLowerCase());
+  return inflection.dasherize(inflection.singularize(name).toLowerCase());
 }

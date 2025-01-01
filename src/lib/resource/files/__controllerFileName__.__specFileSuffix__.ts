@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { <%= controllerClassName %> } from './<%= controllerFileName %>';
-import { <%= serviceClassName %> } from './<%= serviceFileName %>';
+import { <%= controllerClassName %> } from './<%= controllerFileName %>.ts';
+import { <%= serviceClassName %> } from './<%= serviceFileName %>.ts';
 
 describe('<%= controllerClassName %>', () => {
   let controller: <%= controllerClassName %>;

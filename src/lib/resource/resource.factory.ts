@@ -94,11 +94,12 @@ function addDeclarationToModule(options: ResourceOptions): Rule {
       return tree;
     }
     const content = tree.read(options.module).toString();
-    const declarator: ModuleDeclarator = new ModuleDeclarator();
+    const declarator = new ModuleDeclarator();
     tree.overwrite(
       options.module,
       declarator.declare(content, {
         ...options,
+        name: inflection.singularize(options.name),
         type: 'module',
       } as DeclarationOptions),
     );

@@ -1,22 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { Transactional } from 'typeorm-transactional';
+import { InjectRepository } from '@nestjs/typeorm';
+import type { Repository } from 'typeorm';
 
-import type { PageDto } from '../../common/dto/page.dto';
-import { ValidatorService } from '../../shared/services/validator.service';
-import { <%= createCommandClassName %> } from './commands/<%= createCommandFileName %>';
-import type { <%= dtoClassName %> } from './dtos/<%= dtoFileName %>';
-import type { <%= pageOptionsDtoClassName %> } from './dtos/<%= pageOptionsDtoFileName %>';
-import { <%= notFoundExceptionClassName %> } from './exceptions/<%= notFoundExceptionFileName %>';
-import type { <%= entityClassName %> } from './<%= entityFileName %>';
-import { <%= repositoryClassName %> } from './<%= repositoryFileName %>';
-import { <%= createDtoClassName %> } from './dtos/<%= createDtoFileName %>';
-import type { <%= updateDtoClassName %> } from './dtos/<%= updateDtoFileName %>';
+import type { PageDto } from '../../common/dto/page.dto.ts';
+import { ValidatorService } from '../../shared/services/validator.service.ts';
+import { <%= createCommandClassName %> } from './commands/<%= createCommandFileName %>.ts';
+import type { <%= dtoClassName %> } from './dto/<%= dtoFileName %>.ts';
+import type { <%= pageOptionsDtoClassName %> } from './dto/<%= pageOptionsDtoFileName %>.ts';
+import { <%= notFoundExceptionClassName %> } from './exceptions/<%= notFoundExceptionFileName %>.ts';
+import { <%= entityClassName %> } from './<%= entityFileName %>.ts';
+import { <%= createDtoClassName %> } from './dto/<%= createDtoFileName %>.ts';
+import type { <%= updateDtoClassName %> } from './dto/<%= updateDtoFileName %>.ts';
 
 @Injectable()
 export class <%= serviceClassName %> {
   constructor(
-    private <%= repositoryVarName %>: <%= repositoryClassName %>,
+    @InjectRepository(<%= entityClassName %>)
+    private <%= repositoryVarName %>: Repository<<%= entityClassName %>>,
   private validatorService: ValidatorService,
   private commandBus: CommandBus,
 ) {}

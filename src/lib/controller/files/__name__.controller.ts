@@ -12,10 +12,10 @@ import {
 
 import type { PageDto } from '../../common/dto/page.dto';
 import { Auth, UUIDParam } from '../../decorators';
-import { <%= createDtoClassName %> } from './dtos/<%= createDtoFileName %>';
-import type { <%= dtoClassName %> } from './dtos/<%= dtoFileName %>';
-import { <%= pageOptionsDtoClassName %> } from './dtos/<%= pageOptionsDtoFileName %>';
-import { <%= updateDtoClassName %> } from './dtos/<%= updateDtoFileName %>';
+import { <%= createDtoClassName %> } from './dto/<%= createDtoFileName %>';
+import type { <%= dtoClassName %> } from './dto/<%= dtoFileName %>';
+import { <%= pageOptionsDtoClassName %> } from './dto/<%= pageOptionsDtoFileName %>';
+import { <%= updateDtoClassName %> } from './dto/<%= updateDtoFileName %>';
 import { <%= serviceClassName %> } from './<%= serviceFileName %>';
 
 @Controller('<%= controllerName %>')
