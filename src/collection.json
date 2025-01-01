@@ -25,12 +25,6 @@
       "schema": "./lib/filter/schema.json",
       "aliases": ["f"]
     },
-    "gateway": {
-      "factory": "./lib/gateway/gateway.factory#main",
-      "description": "Create a Nest gateway.",
-      "schema": "./lib/gateway/schema.json",
-      "aliases": ["ga"]
-    },
     "guard": {
       "factory": "./lib/guard/guard.factory#main",
       "description": "Create a Nest guard.",
@@ -78,29 +72,6 @@
       "description": "Create a Nest service.",
       "schema": "./lib/service/schema.json",
       "aliases": ["s"]
-    },
-    "resolver": {
-      "factory": "./lib/resolver/resolver.factory#main",
-      "description": "Create a Nest resolver.",
-      "schema": "./lib/resolver/schema.json",
-      "aliases": ["r"]
-    },
-    "configuration": {
-      "factory": "./lib/configuration/configuration.factory#main",
-      "description": "Create a Nest CLI configuration.",
-      "aliases": ["config"]
-    },
-    "library": {
-      "factory": "./lib/library/library.factory#main",
-      "description": "Create a Nest library (mono-repo).",
-      "schema": "./lib/library/schema.json",
-      "aliases": ["lib"]
-    },
-    "sub-app": {
-      "factory": "./lib/sub-app/sub-app.factory#main",
-      "description": "Create a Nest application (mono-repo).",
-      "schema": "./lib/sub-app/schema.json",
-      "aliases": ["app"]
     },
     "resource": {
       "factory": "./lib/resource/resource.factory#main",
