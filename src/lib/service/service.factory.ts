@@ -20,7 +20,7 @@ import {
   ModuleDeclarator,
 } from '../../utils/module.declarator';
 import { ModuleFinder } from '../../utils/module.finder';
-import { Location, NameParser } from '../../utils/name.parser';
+import { NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
 import { ServiceOptions } from './service.schema';
 
@@ -49,7 +49,7 @@ function transform(source: ServiceOptions): ServiceOptions {
   if (isNullOrUndefined(target.name)) {
     throw new SchematicsException('Option (name) is required.');
   }
-  const location: Location = new NameParser().parse(target);
+  const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
   target.path = normalizeToKebabOrSnakeCase(location.path);
   target.specFileSuffix = normalizeToKebabOrSnakeCase(

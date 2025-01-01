@@ -1,6 +1,6 @@
 {
   "name": "awesome-nestjs-schematics",
-  "version": "10.0.0",
+  "version": "10.0.1",
   "description": "Awesome NestJS Schematics, designed and developed for Awesome Nest Boilerplate",
   "main": "dist/index.js",
   "files": [

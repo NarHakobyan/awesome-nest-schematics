@@ -14,7 +14,7 @@ import {
   url,
 } from '@angular-devkit/schematics';
 import { normalizeToKebabOrSnakeCase } from '../../utils/formatting';
-import { Location, NameParser } from '../../utils/name.parser';
+import { NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
 import { FilterOptions } from './filter.schema';
 
@@ -28,9 +28,9 @@ function transform(options: FilterOptions): FilterOptions {
   if (!target.name) {
     throw new SchematicsException('Option (name) is required.');
   }
-  const location: Location = new NameParser().parse(target);
+  const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
-  target.path = normalizeToKebabOrSnakeCase(location.path);
+  target.path = normalizeToKebabOrSnakeCase(join('/filters/' as Path, location.path));
   target.specFileSuffix = normalizeToKebabOrSnakeCase(
     options.specFileSuffix || 'spec',
   );

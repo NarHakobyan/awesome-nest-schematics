@@ -21,7 +21,7 @@ import {
   getPackageJsonDependency,
 } from '../../utils/dependencies.utils';
 import { normalizeToKebabOrSnakeCase } from '../../utils/formatting';
-import { Location, NameParser } from '../../utils/name.parser';
+import { NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
 import { ResourceOptions } from './resource.schema';
 import * as inflection from 'inflection';
@@ -48,9 +48,9 @@ function transform(options: ResourceOptions): ResourceOptions {
   }
   target.metadata = 'imports';
 
-  const location: Location = new NameParser().parse(target);
+  const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(inflection.pluralize(location.name));
-  target.path = normalizeToKebabOrSnakeCase(location.path);
+  target.path = normalizeToKebabOrSnakeCase(join('/modules/' as Path, location.path));
 
   target.specFileSuffix = normalizeToKebabOrSnakeCase(
     options.specFileSuffix || 'spec',

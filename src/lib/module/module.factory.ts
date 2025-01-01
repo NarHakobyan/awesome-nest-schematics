@@ -17,7 +17,7 @@ import {
   ModuleDeclarator,
 } from '../../utils/module.declarator';
 import { ModuleFinder } from '../../utils/module.finder';
-import { Location, NameParser } from '../../utils/name.parser';
+import { NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
 import { ModuleOptions } from './module.schema';
 
@@ -39,7 +39,7 @@ function transform(source: ModuleOptions): ModuleOptions {
   target.metadata = 'imports';
   target.type = 'module';
 
-  const location: Location = new NameParser().parse(target);
+  const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
   target.path = normalizeToKebabOrSnakeCase(location.path);
 
@@ -73,7 +73,7 @@ function addDeclarationToModule(options: ModuleOptions): Rule {
       return tree;
     }
     const content = tree.read(options.module).toString();
-    const declarator: ModuleDeclarator = new ModuleDeclarator();
+    const declarator = new ModuleDeclarator();
     tree.overwrite(
       options.module,
       declarator.declare(content, options as DeclarationOptions),

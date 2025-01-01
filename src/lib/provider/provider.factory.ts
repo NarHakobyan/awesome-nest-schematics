@@ -20,7 +20,7 @@ import {
   ModuleDeclarator,
 } from '../../utils/module.declarator';
 import { ModuleFinder } from '../../utils/module.finder';
-import { Location, NameParser } from '../../utils/name.parser';
+import { NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
 import { ProviderOptions } from './provider.schema';
 
@@ -38,7 +38,7 @@ export function main(options: ProviderOptions): Rule {
 }
 
 function transform(options: ProviderOptions): ProviderOptions {
-  const target: ProviderOptions = Object.assign({}, options);
+  const target = Object.assign({}, options);
   target.metadata = 'providers';
   target.specFileSuffix = normalizeToKebabOrSnakeCase(
     options.specFileSuffix || 'spec',
@@ -47,7 +47,7 @@ function transform(options: ProviderOptions): ProviderOptions {
   if (!target.name) {
     throw new SchematicsException('Option (name) is required.');
   }
-  const location: Location = new NameParser().parse(target);
+  const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
   if (target.name.includes('.')) {
     target.className = strings.classify(target.name).replace('.', '');

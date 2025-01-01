@@ -21,7 +21,7 @@ import {
   ModuleDeclarator,
 } from '../../utils/module.declarator';
 import { ModuleFinder } from '../../utils/module.finder';
-import { Location, NameParser } from '../../utils/name.parser';
+import { NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
 import { ProviderOptions } from '../provider/provider.schema';
 import { GatewayOptions } from './gateway.schema';
@@ -50,7 +50,7 @@ function transform(options: GatewayOptions): GatewayOptions {
     options.specFileSuffix || 'spec',
   );
 
-  const location: Location = new NameParser().parse(target);
+  const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
   target.path = normalizeToKebabOrSnakeCase(location.path);
 

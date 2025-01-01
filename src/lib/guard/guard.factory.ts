@@ -14,7 +14,7 @@ import {
   url,
 } from '@angular-devkit/schematics';
 import { normalizeToKebabOrSnakeCase } from '../../utils/formatting';
-import { Location, NameParser } from '../../utils/name.parser';
+import { NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
 import { GuardOptions } from './guard.schema';
 
@@ -24,13 +24,13 @@ export function main(options: GuardOptions): Rule {
 }
 
 function transform(options: GuardOptions): GuardOptions {
-  const target: GuardOptions = Object.assign({}, options);
+  const target = Object.assign({}, options);
   if (!target.name) {
     throw new SchematicsException('Option (name) is required.');
   }
-  const location: Location = new NameParser().parse(target);
+  const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
-  target.path = normalizeToKebabOrSnakeCase(location.path);
+  target.path = normalizeToKebabOrSnakeCase(join('/guards/' as Path, location.path));
   target.specFileSuffix = normalizeToKebabOrSnakeCase(
     options.specFileSuffix || 'spec',
   );

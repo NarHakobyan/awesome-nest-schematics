@@ -14,7 +14,7 @@ import {
   url,
 } from '@angular-devkit/schematics';
 import { normalizeToKebabOrSnakeCase } from '../../utils/formatting';
-import { Location, NameParser } from '../../utils/name.parser';
+import { NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
 import { PipeOptions } from './pipe.schema';
 
@@ -24,11 +24,11 @@ export function main(options: PipeOptions): Rule {
 }
 
 function transform(options: PipeOptions): PipeOptions {
-  const target: PipeOptions = Object.assign({}, options);
+  const target = Object.assign({}, options);
   if (!target.name) {
     throw new SchematicsException('Option (name) is required.');
   }
-  const location: Location = new NameParser().parse(target);
+  const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
   target.path = normalizeToKebabOrSnakeCase(location.path);
   target.specFileSuffix = normalizeToKebabOrSnakeCase(
@@ -42,7 +42,7 @@ function transform(options: PipeOptions): PipeOptions {
 }
 
 function generate(options: PipeOptions): Source {
-  return (context: SchematicContext) =>
+  return (context) =>
     apply(url('./files'), [
       options.spec ? noop() : filter((path) => !path.endsWith('.spec.ts')),
       options.spec

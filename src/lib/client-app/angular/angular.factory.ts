@@ -20,7 +20,7 @@ import {
   ModuleDeclarator,
 } from '../../../utils/module.declarator';
 import { ModuleFinder } from '../../../utils/module.finder';
-import { Location, NameParser } from '../../../utils/name.parser';
+import { NameParser } from '../../../utils/name.parser';
 import { mergeSourceRoot } from '../../../utils/source-root.helpers';
 import { ModuleOptions } from '../../module/module.schema';
 import { AngularOptions } from './angular.schema';
@@ -47,7 +47,7 @@ function transform(source: AngularOptions): ModuleOptions {
   target.metadata = 'imports';
   target.type = 'module';
 
-  const location: Location = new NameParser().parse(target);
+  const location = new NameParser().parse(target);
   target.name = strings.dasherize(location.name);
   target.path = join(strings.dasherize(location.path) as Path, target.name);
   return target;

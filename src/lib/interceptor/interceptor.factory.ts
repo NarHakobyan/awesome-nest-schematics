@@ -7,14 +7,13 @@ import {
   move,
   noop,
   Rule,
-  SchematicContext,
   SchematicsException,
   Source,
   template,
   url,
 } from '@angular-devkit/schematics';
 import { normalizeToKebabOrSnakeCase } from '../../utils/formatting';
-import { Location, NameParser } from '../../utils/name.parser';
+import { NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
 import { InterceptorOptions } from './interceptor.schema';
 
@@ -24,13 +23,13 @@ export function main(options: InterceptorOptions): Rule {
 }
 
 function transform(options: InterceptorOptions): InterceptorOptions {
-  const target: InterceptorOptions = Object.assign({}, options);
+  const target = Object.assign({}, options);
   if (!target.name) {
     throw new SchematicsException('Option (name) is required.');
   }
-  const location: Location = new NameParser().parse(target);
+  const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
-  target.path = normalizeToKebabOrSnakeCase(location.path);
+  target.path = normalizeToKebabOrSnakeCase(join('/interceptors/' as Path, location.path));
   target.specFileSuffix = normalizeToKebabOrSnakeCase(
     options.specFileSuffix || 'spec',
   );
@@ -42,7 +41,7 @@ function transform(options: InterceptorOptions): InterceptorOptions {
 }
 
 function generate(options: InterceptorOptions): Source {
-  return (context: SchematicContext) =>
+  return (context) =>
     apply(url('./files'), [
       options.spec ? noop() : filter((path) => !path.endsWith('.spec.ts')),
       options.spec

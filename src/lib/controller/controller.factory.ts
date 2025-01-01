@@ -21,7 +21,7 @@ import {
   ModuleDeclarator,
 } from '../../utils/module.declarator';
 import { ModuleFinder } from '../../utils/module.finder';
-import { Location, NameParser } from '../../utils/name.parser';
+import { NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
 import { ControllerOptions } from './controller.schema';
 
@@ -42,13 +42,13 @@ export function main(options: ControllerOptions): Rule {
 }
 
 function transform(source: ControllerOptions): ControllerOptions {
-  const target: ControllerOptions = Object.assign({}, source);
+  const target = Object.assign({}, source);
   target.metadata = ELEMENT_METADATA;
   target.type = ELEMENT_TYPE;
 
-  const location: Location = new NameParser().parse(target);
+  const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
-  target.path = normalizeToKebabOrSnakeCase(location.path);
+  target.path = normalizeToKebabOrSnakeCase(join('/modules/' as Path, location.path));
 
   target.specFileSuffix = normalizeToKebabOrSnakeCase(
     source.specFileSuffix || 'spec',

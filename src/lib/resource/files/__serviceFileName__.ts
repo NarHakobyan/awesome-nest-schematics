@@ -5,7 +5,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import type { Repository } from 'typeorm';
 
 import type { PageDto } from '../../common/dto/page.dto.ts';
-import { ValidatorService } from '../../shared/services/validator.service.ts';
 import { <%= createCommandClassName %> } from './commands/<%= createCommandFileName %>.ts';
 import type { <%= dtoClassName %> } from './dto/<%= dtoFileName %>.ts';
 import type { <%= pageOptionsDtoClassName %> } from './dto/<%= pageOptionsDtoFileName %>.ts';
@@ -19,7 +18,6 @@ export class <%= serviceClassName %> {
   constructor(
     @InjectRepository(<%= entityClassName %>)
     private <%= repositoryVarName %>: Repository<<%= entityClassName %>>,
-  private validatorService: ValidatorService,
   private commandBus: CommandBus,
 ) {}
 
