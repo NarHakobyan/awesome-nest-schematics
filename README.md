@@ -36,7 +36,7 @@ OR
 ```bash
 $ yarn generate <schematic> <name>
 ```
-  
+
 
 For example, to generate a new controller:
 
@@ -109,6 +109,16 @@ $ nest g -c awesome-nestjs-schematics controller
 - **Service**: Generate a new Nest service.
   ```bash
   $ yarn generate service
+  ```
+
+- **Command**: Generate a new Nest CQRS command.
+  ```bash
+  $ yarn generate command
+  ```
+
+- **Query**: Generate a new Nest CQRS query.
+  ```bash
+  $ yarn generate query
   ```
 
 ## Stay in touch
