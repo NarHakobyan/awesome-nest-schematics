@@ -14,9 +14,15 @@ export function generate(name: string) {
     entityClassName: toEntityClassName(name),
     translationEntityClassName: toTranslationEntityClassName(name),
     createCommandClassName: toCreateCommandClassName(name),
+    commandClassName: toCommandClassName(name),
+    commandFileName: toCommandFileName(name),
+    handlerFileName: toHandlerFileName(name),
+    queryFileName: toQueryFileName(name),
     createHandlerClassName: toCreateHandlerClassName(name),
+    handlerClassName: toHandlerClassName(name),
     getHandlerClassName: toGetHandlerClassName(name),
     getQueryClassName: toGetQueryClassName(name),
+    queryClassName: toQueryClassName(name),
     pageOptionsDtoClassName: toPageOptionsDtoClassName(name),
     notFoundExceptionClassName: toNotFoundExceptionClassName(name),
     entityFileName: toEntityFileName(name),
@@ -92,6 +98,12 @@ export function toTranslationEntityClassName(name): string {
 export function toCreateCommandClassName(name): string {
   return `Create${toClassName(name)}Command`;
 }
+export function toCommandClassName(name): string {
+  return `${toClassName(name)}Command`;
+}
+export function toHandlerClassName(name): string {
+  return `${toClassName(name)}Handler`;
+}
 export function toCreateHandlerClassName(name): string {
   return `Create${toClassName(name)}Handler`;
 }
@@ -100,6 +112,9 @@ export function toGetHandlerClassName(name): string {
 }
 export function toGetQueryClassName(name): string {
   return `Get${toClassName(name)}Query`;
+}
+export function toQueryClassName(name): string {
+  return `${toClassName(name)}Query`;
 }
 export function toPageOptionsDtoClassName(name): string {
   return toClassName(name) + 'PageOptionsDto';
@@ -125,11 +140,20 @@ export function toTranslationRepositoryFileName(name): string {
 export function toCreateCommandFileName(name: string) {
   return `create-${toFileName(name)}.command`;
 }
+export function toCommandFileName(name: string) {
+  return `${toFileName(name)}.command`;
+}
 export function toCreateHandlerFileName(name: string) {
   return `create-${toFileName(name)}.handler`;
 }
+export function toHandlerFileName(name: string) {
+  return `${toFileName(name)}.handler`;
+}
 export function toGetQueryFileName(name: string) {
   return `get-${toFileName(name)}.query`;
+}
+export function toQueryFileName(name: string) {
+  return `${toFileName(name)}.query`;
 }
 export function toGetHandlerFileName(name: string) {
   return `get-${toFileName(name)}.handler`;

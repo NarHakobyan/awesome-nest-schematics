@@ -73,6 +73,18 @@
       "schema": "./lib/service/schema.json",
       "aliases": ["s"]
     },
+    "command": {
+      "factory": "./lib/command/command.factory#main",
+      "description": "Create a Nest command.",
+      "schema": "./lib/command/schema.json",
+      "aliases": ["cmd"]
+    },
+    "query": {
+      "factory": "./lib/query/query.factory#main",
+      "description": "Create a Nest query.",
+      "schema": "./lib/query/schema.json",
+      "aliases": ["qry"]
+    },
     "resource": {
       "factory": "./lib/resource/resource.factory#main",
       "description": "Create a Nest resource.",

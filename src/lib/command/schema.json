@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "SchematicsNestService",
+  "title": "Nest Service Options Schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the command.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the command?"
+    },
+    "moduleName": {
+      "type": "string",
+      "description": "The name of the module.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What module would you like to use for?"
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the service."
+    },
+    "sourceRoot": {
+      "type": "string",
+      "description": "Nest service source root directory."
+    },
+    "flat": {
+      "type": "boolean",
+      "default": true,
+      "description": "Flag to indicate if a directory is created."
+    },
+    "spec": {
+      "type": "boolean",
+      "default": false,
+      "description": "Specifies if a spec file is generated."
+    },
+    "specFileSuffix": {
+      "type": "string",
+      "default": "spec",
+      "description": "Specifies the file suffix of spec files."
+    }
+  },
+  "required": ["name"]
+}

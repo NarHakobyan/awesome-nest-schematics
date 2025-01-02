@@ -34,7 +34,7 @@ export class ModuleImportDeclarator {
     let importModulePath: Path;
     if (options.type !== undefined) {
       importModulePath = normalize(
-        `/${options.path}/${options.name}.${options.type}`,
+        `/${options.path}/${options.name}.${options.type}.ts`,
       );
     } else {
       importModulePath = normalize(`/${options.path}/${options.name}`);
