@@ -9,13 +9,19 @@ import { UseDto } from '../../decorators/use-dto.decorator.ts';
 @Entity({ name: '<%= translationsTableName %>' })
 @UseDto(<%= translationDtoClassName %>)
 export class <%= translationEntityClassName %> extends AbstractTranslationEntity<<%= translationDtoClassName %>> {
-  @Column({ type: 'uuid' })
-    <%= foreignKeyFieldName %>!: Uuid;
+  @Column()
+  title!: string;
 
-@ManyToOne(() => <%= entityClassName %>, (entity) => entity.translations, {
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-})
-@JoinColumn({ name: '<%= foreignKeyColumnName %>' })
-<%= fieldName %>!: Relation<<%= entityClassName %>>;
+  @Column()
+  description!: string;
+
+  @Column({ type: 'uuid' })
+  <%= foreignKeyFieldName %>!: Uuid;
+
+  @ManyToOne(() => <%= entityClassName %>, (entity) => entity.translations, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn({ name: '<%= foreignKeyColumnName %>' })
+  <%= fieldName %>!: Relation<<%= entityClassName %>>;
 }
