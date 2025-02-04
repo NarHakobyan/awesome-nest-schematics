@@ -30,7 +30,7 @@ function transform(options: MiddlewareOptions): MiddlewareOptions {
   }
   const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
-  target.path = normalizeToKebabOrSnakeCase(location.path);
+  target.path = normalizeToKebabOrSnakeCase(join('/middlewares/' as Path, location.path));
     target.specFileSuffix = normalizeToKebabOrSnakeCase(
     options.specFileSuffix || 'spec',
   );

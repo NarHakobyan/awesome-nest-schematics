@@ -14,6 +14,10 @@ export interface ServiceOptions {
    */
   module?: Path;
   /**
+   * The path to insert the service declaration.
+   */
+  moduleName?: Path;
+  /**
    * Directive to insert declaration in module.
    */
   skipImport?: boolean;

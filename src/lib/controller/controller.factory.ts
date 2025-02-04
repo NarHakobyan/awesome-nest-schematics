@@ -41,17 +41,17 @@ export function main(options: ControllerOptions): Rule {
   };
 }
 
-function transform(source: ControllerOptions): ControllerOptions {
-  const target = Object.assign({}, source);
+function transform(options: ControllerOptions): ControllerOptions {
+  const target = Object.assign({}, options);
   target.metadata = ELEMENT_METADATA;
   target.type = ELEMENT_TYPE;
 
   const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
-  target.path = normalizeToKebabOrSnakeCase(join('/modules/' as Path, location.path));
+  target.path = normalizeToKebabOrSnakeCase(join(`/modules/${options.moduleName}` as Path, location.path));
 
   target.specFileSuffix = normalizeToKebabOrSnakeCase(
-    source.specFileSuffix || 'spec',
+    options.specFileSuffix || 'spec',
   );
 
   target.path = target.flat

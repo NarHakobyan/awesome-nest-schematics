@@ -30,7 +30,7 @@ function transform(options: PipeOptions): PipeOptions {
   }
   const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
-  target.path = normalizeToKebabOrSnakeCase(location.path);
+  target.path = normalizeToKebabOrSnakeCase(join('/pipes/' as Path, location.path));
   target.specFileSuffix = normalizeToKebabOrSnakeCase(
     options.specFileSuffix || 'spec',
   );

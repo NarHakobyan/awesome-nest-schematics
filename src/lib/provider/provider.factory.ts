@@ -55,7 +55,7 @@ function transform(options: ProviderOptions): ProviderOptions {
     target.className = strings.classify(target.name);
   }
 
-  target.path = normalizeToKebabOrSnakeCase(location.path);
+  target.path = normalizeToKebabOrSnakeCase(join('/providers/' as Path, location.path));
 
   target.path = target.flat
     ? target.path

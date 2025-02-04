@@ -41,8 +41,8 @@ export function main(options: ServiceOptions): Rule {
   };
 }
 
-function transform(source: ServiceOptions): ServiceOptions {
-  const target: ServiceOptions = Object.assign({}, source);
+function transform(options: ServiceOptions): ServiceOptions {
+  const target = Object.assign({}, options);
   target.metadata = 'providers';
   target.type = 'service';
 
@@ -51,9 +51,9 @@ function transform(source: ServiceOptions): ServiceOptions {
   }
   const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
-  target.path = normalizeToKebabOrSnakeCase(location.path);
+  target.path = normalizeToKebabOrSnakeCase(join(`/modules/${options.moduleName}` as Path, location.path));
   target.specFileSuffix = normalizeToKebabOrSnakeCase(
-    source.specFileSuffix || 'spec',
+    options.specFileSuffix || 'spec',
   );
 
   target.path = target.flat

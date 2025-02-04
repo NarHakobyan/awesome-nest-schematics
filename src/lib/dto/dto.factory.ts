@@ -36,8 +36,8 @@ function transform(options: DtoOptions): DtoOptions {
     options.specFileSuffix || 'spec',
   );
   target.dtoName = toDtoClassName(target.name).replace('.', '');
+  target.path = normalizeToKebabOrSnakeCase(join('/modules/' as Path, location.path));
 
-  target.path = normalizeToKebabOrSnakeCase(location.path);
   target.path = target.flat
     ? join(target.path as Path, 'dtos')
     : join(target.path as Path, 'dtos', target.name);

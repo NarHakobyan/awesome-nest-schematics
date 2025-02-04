@@ -27,9 +27,14 @@
       "description": "Flag to skip the module import.",
       "default": false
     },
-    "module": {
+    "moduleName": {
       "type": "string",
-      "description": "Allows specification of the declaring module."
+      "description": "The name of the module.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What module would you like to use for?"
     },
     "flat": {
       "type": "boolean",

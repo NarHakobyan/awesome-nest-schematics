@@ -28,7 +28,7 @@ function transform(options: InterfaceOptions): InterfaceOptions {
   }
   const location = new NameParser().parse(target);
   target.name = normalizeToKebabOrSnakeCase(location.name);
-  target.path = normalizeToKebabOrSnakeCase(location.path);
+  target.path = normalizeToKebabOrSnakeCase(join('/interfaces/' as Path, location.path));
 
   target.path = target.flat
     ? target.path
